@@ -40,9 +40,11 @@ export class LoginPage {
 
     async assertError(expected: string, type: ErrorType) {
         if (type === 'alert') {
+            await this.alertError.waitFor({state: 'visible', timeout: 10_000});
             await expect(this.alertError).toHaveText(expected);
         }
         else {
+            await this.fieldError.waitFor({state: 'visible', timeout: 10_000});
             await expect(this.fieldError).toContainText(expected);
         }
     }

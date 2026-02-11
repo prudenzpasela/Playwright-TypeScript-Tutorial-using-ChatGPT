@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-
+import { ENV } from '../env';
 
 type ErrorType = 'alert' | 'field';
 
@@ -21,13 +21,11 @@ export class LoginPage {
         // two different error patterns
         this.alertError = page.getByRole('alert');
         this.fieldError = page.locator('.oxd-input-field-error-message');
-
-    
     
     }
 
     async goto() {
-        await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        await this.page.goto(ENV.BASE_URL);
     }
     
 

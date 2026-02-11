@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import './env';
+import { requireEnv } from './env';
 
 /**
  * Read environment variables from file.
@@ -27,7 +29,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-     baseURL: 'https://opensource-demo.orangehrmlive.com',
+     baseURL: requireEnv('E2E_BASE_URL'),
      headless: true,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

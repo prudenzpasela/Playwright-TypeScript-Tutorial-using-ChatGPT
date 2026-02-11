@@ -25,3 +25,18 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Run Playwright tests
+      run: npx playwright
+      env:
+        E2E_USERNAME: ${{ secrets.E2E_USERNAME}}
+        E2E_PASSWORD: ${{ secrets.E2E_PASSWORD}}
+        BASE_URL: ${{ secrets.BASE_URL}}
+
+    - name: Run Playwright Test (Staging)
+      run: npx playwright test
+      env:
+          E2E_ENV: staging
+          E2E_BASE_URL: ${{ secrets.STAGING_BASE_URL }}
+          E2E_USERNAME: ${{ secrets.STAGING_USERNAME}}
+          E2E_PASSWORD: ${{ secrets.STAGING_PASSWORD}}
+

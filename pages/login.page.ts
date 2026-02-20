@@ -25,7 +25,7 @@ export class LoginPage {
     }
 
     async goto() {
-        await this.page.goto(ENV.BASE_URL);
+        await this.page.goto(ENV.E2E_BASE_URL);
     }
     
 

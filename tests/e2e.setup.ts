@@ -1,6 +1,6 @@
 import { chromium, FullConfig } from '@playwright/test';
 import { LoginPage } from '@pages/login.page';
-import { env } from '../env'
+import { ENV } from '../env'
 
 async function globalSetup(config: FullConfig) {
     const browser = await chromium.launch();
@@ -8,7 +8,7 @@ async function globalSetup(config: FullConfig) {
 
     const login = new LoginPage(page);
     await login.goto();
-    await login.login(env.E2E_USERNAME, env.E2E_PASSWORD);
+    await login.login(ENV.E2E_USERNAME, ENV.E2E_PASSWORD);
 
 
 // Verify login succeeded

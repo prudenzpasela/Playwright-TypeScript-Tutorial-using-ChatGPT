@@ -1,6 +1,6 @@
 import { chromium, FullConfig } from '@playwright/test';
 import { LoginPage } from '@pages/login.page';
-import { ENV } from '../env'
+import { ENV } from '../utils/env'
 
 async function globalSetup(config: FullConfig) {
     const browser = await chromium.launch();
@@ -14,7 +14,7 @@ async function globalSetup(config: FullConfig) {
 // Verify login succeeded
 await page.waitForURL('**/dashboard');
 
-// Save aut state
+// Save auth state
 await page.context().storageState({ path: 'storage/auth.json'});
 
 await browser.close();

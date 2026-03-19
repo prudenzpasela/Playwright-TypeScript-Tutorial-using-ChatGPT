@@ -11,6 +11,8 @@
       "@pages/*": ["pages/*"],
       "@tests/*": ["tests/*"],
       "@test-data/*": ["test-data/*"],
+      "@fixtures/*": ["fixtures/*"],
+      "@utils/*": ["utils/*"],
     }
   },
   "include": ["**/*.ts"]

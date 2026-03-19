@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-import './env';
-import { requireEnv } from './env';
+import './utils/env';
+import { requireEnv } from './utils/env';
 
 /**
  * Read environment variables from file.
@@ -27,11 +27,12 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  //globalSetup: './tests/e2e.setup.ts',
+  globalSetup: require.resolve('./tests/setup/auth.setup.ts'),
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-     baseURL: requireEnv('E2E_BASE_URL'),
-     //storageState: 'storage/auth.json',
+     baseURL: process.env.E2E_BASE_URL,
+     storageState: 'playwright/.auth/user.json',
+     headless: false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry', // captures trace only on failure

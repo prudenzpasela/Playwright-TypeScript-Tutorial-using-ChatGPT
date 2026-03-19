@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { ENV } from '../env';
+import { ENV } from '@utils/env';
 
 type ErrorType = 'alert' | 'field';
 
@@ -10,6 +10,7 @@ export class LoginPage {
     readonly loginButton: Locator;
     readonly alertError: Locator;
     readonly fieldError: Locator;
+    readonly dashboardHeader: Locator;
 
     
     constructor(page: Page) {
@@ -21,6 +22,8 @@ export class LoginPage {
         // two different error patterns
         this.alertError = page.getByRole('alert');
         this.fieldError = page.locator('.oxd-input-field-error-message');
+
+        this.dashboardHeader = page.getByRole('heading', { name: 'Dashboard' });
     
     }
 
@@ -32,7 +35,13 @@ export class LoginPage {
     async login(username: string, password: string) {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
-        await this.loginButton.click();
+
+        await Promise.all([
+            
+            this.page.waitForURL('**/dashboard/**'),
+            this.loginButton.click()
+        ]);
+
         
     }
 

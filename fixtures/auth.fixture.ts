@@ -1,15 +1,25 @@
-import { Page, test as base } from '@playwright/test';
-import { LoginPage } from '@pages/login.page';
+import { test as base } from '@fixtures/page.fixture';
+import { users } from '@utils/test-data';
+import { Page } from '@playwright/test';
 
-export const test = base.extend<{ authenticatedPage: Page; }>({
-    authenticatedPage: async ({ page }, use) => {
-        const loginPage = new LoginPage(page);
+type AuthFixtures = {
+    authPage: Page;
+};
 
-        // Setup: Log in before using the page
+export const test = base.extend<AuthFixtures>({
+    
+    authPage: async ({ page, loginPage }, use) => {
+
+        // Step 1: Go to login page
         await loginPage.goto();
-        await loginPage.login( process.env.E2E_USERNAME!, process.env.E2E_PASSWORD! );
 
-        // Give page to test
+        // Step 2: Perform login using your page object
+        await loginPage.login(
+            users.admin.username,
+            users.admin.password
+        );
+
+        // Step 3:Give the logged-in page to the test
         await use(page);
     },
 });

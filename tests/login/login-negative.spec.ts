@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '@pages/login.page';
-import { ErrorType, loginNegativeCases } from '@test-data/login.data';
+import { ErrorType, loginNegativeCases } from '@utils/login.data';
 
 
 
